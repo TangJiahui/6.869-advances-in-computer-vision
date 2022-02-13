@@ -1,0 +1,141 @@
+%
+\documentclass[11pt]{article}
+
+\usepackage[left=3cm,top=2cm,bottom=2cm,right=3cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{epsf}
+\usepackage{psfrag}
+\usepackage{epsfig}
+\usepackage{textcomp}
+\usepackage{hyperref}
+\newcommand{\comment}[1]{{}}
+
+\newcommand{\hwproblem}[2] {\noindent \\ {\bf #1} {\it #2}}
+
+\newcommand{\textbox}[1]{\hfill\rule{0ex}{0.01ex}
+ \centerline{\fbox{\parbox{\textwidth}{#1}}}}
+
+
+\pagestyle{plain} % Header is clear and the footer contains the page number
+\setlength{\parindent}{0pt}
+\addtolength{\parskip}{\baselineskip}
+
+
+\begin{document}
+
+
+% Header
+\begin{center}
+\small{MIT CSAIL} \\
+\vspace{0.1cm}
+\large{6.819/6.869 Advances in Computer Vision} \\
+\vspace{0.2cm}
+Spring 2021\\
+\vspace{1cm}
+{\bf Problem Set 1}
+\vspace{0.2cm}
+\end{center}
+
+% Administration
+\textbox{
+\textbf{Posted:} Tuesday, February 8, 2022   \hfill  \textbf{Due:} Tuesday 23:59, Feb 15, 2022\\
+\\
+6.869 and 6.819 students are expected to finish all problems unless otherwise indicated. \\
+\\
+We provide a python notebook with the code to be completed. You can run it locally or in Colab. To use Colab, upload it to Google Drive and select `open in colab',  which will allow you to complete the problems without setting up your own environment. Once you have  finished, copy the code sections that  you have completed\ as screenshots to the report. \\
+\\
+Please submit a .zip file named \textlangle{}your\_kerberos\textrangle{}.zip containing 1) a report named \texttt{report.pdf} including your answers to all required questions with images and/or plots showing your results, and 2) the python notebook provided, with the cells run and the relevant source code. \textbf{Only the
+report will be considered for grading}, but the code may be used in case of code of honor violations. \\
+\\
+ \textbf{Late Submission Policy:} If your pset is submitted within 7 days (rounding up) of the original deadline, you will receive partial credit. Such submissions will be penalized by a multiplicative coefficient that linearly decreases from 1 to 0.5}\\
+% \textbf{Late Submission Policy:} We do not accept late submissions. The submission deadline has a 50-minute soft cut-off; after midnight Thursday, submissions are penalized 2\% per minute late.\\}\\
+\vspace{0.2cm}
+
+
+\hwproblem{Problem 1}{Perspective and orthographic projections} (1 point)
+
+The goal of this first exercise is to take images with different settings of a camera to create pictures with perspective projection and with orthographic projection. Both pictures should cover the same piece of the scene. You can take pictures of real places or objects (e.g. your furniture).% (e.g., the street, a living room, ...) or you can also create your own simple world (e.g., you can print \texttt{simpleWorld.pdf} and create your own scenes. I recommend printing on matte paper).
+
+To create pictures with orthographic projection you can do two things: 1) use the zoom of the camera, 2) crop the central part of a picture. You will have to play with the distance between the camera and the scene, and with the zoom or cropping so that both images look as similar as possible, only differing in the type of projection (similar to figure 2.2 in the lecture 1 notes - section 1.2 of the book i.e. \texttt{simple\_vision\_system.pdf}).
+
+Submit the two pictures and clearly label parts of the images that reveal their projection types.
+
+
+\hwproblem{Problem 2}{Orthographic projection equations} (1 point)
+
+Recall the parallel projection equations stated in class:
+\begin{gather}
+    x = \alpha  X + x_0\\
+    y = \alpha (\cos(\theta)Y - \sin(\theta)Z) +y_{0}
+\end{gather}
+which relate the coordinates of a point in the 3D world to the image coordinates of an orthogonal camera rotated by $\theta$ over the $X$-axis.
+
+Show that the  equations emerge naturally from a series of transformations
+applied to the 3D world coordinates $(X,Y,Z)$, of the form:
+\begin{gather}
+\left[
+  \begin{array}{c}
+    x \\
+    y
+  \end{array}
+\right] = \alpha \cdot P \cdot R_x(\theta) \cdot
+\left[
+  \begin{array}{ccc}
+    X \\
+    Y \\
+    Z
+  \end{array}
+\right] +
+\left[
+  \begin{array}{c}
+    x_0 \\
+    y_0
+  \end{array}
+\right]
+\end{gather}
+Where $R_x(\theta)$ is a $3\times 3$ matrix corresponding to a rotation over the $X$ axis, $P$ is a $2 \times 3$ matrix corresponding to the orthogonal projection and $\alpha$ is  a scaling factor to account for the size
+of the
+camera sensor, which is a single scalar when the pixels are square (assumed in this case).  
+
+Then, find $\alpha$, $x_0$ and $y_0$ when the world point $(0, 0, 0)$ projects onto  $(0, 0)$ \ (which corresponds to the center of the image) and the point $(1, 0, 0)$ projects onto $(3, 0)$.
+
+
+
+\hwproblem{Problem 3}{Edge and surface constraints} (1 point)
+
+In the lecture 1 slides, we have written down the constraints for $Y(x, y)$. Briefly derive the constraints for $Z(x, y)$ along vertical edges, horizontal edges, and flat surfaces.
+
+
+\hwproblem{Problem 4}{Complete the code} (2 points)
+
+Fill in the missing lines in the notebook: \texttt{Pset1.ipynb}, and include them in the report as screenshots. First, find a way to classify edges as vertical or horizontal edges. Next, fill in the rest of the conditions of the constraint matrix. The constraints for when the pixel is on the ground have already been done for you as an example. Put the kernel in \texttt{Aij} and the value you expect in \texttt{b} (the conversion to a linear system is done for you later so you don't need to worry about that part).
+
+You only need to modify the locations marked with a \texttt{TODO} comment.
+
+Please make sure to also include your answers for \texttt{vertical\_edges}, \texttt{horizontal\_edges}, and your formulations for \texttt{Aij} and \texttt{b} for the different constraints in the report.
+
+\hwproblem{Problem 5}{Run the code} (1 point)
+
+Select some of the images included with the code and show some new viewpoints for them.
+
+Optional: You can also try with new images taken by you if you decide to create your own simple world.
+
+\hwproblem{Problem 6}{Violating simple world assumptions} (1 point)
+
+Find one example from the four images provided with the problem set (\texttt{img1.jpg}, ..., \texttt{img4.jpg}) when the recovery of 3D information fails. Include the image and the reconstruction in your writeup, and explain why it fails.
+
+\hwproblem{Research problem} {The real world} [optional]
+
+\textit{A research problem is a question for which we do not know the answer. In fact, there might not
+even be an answer. This question is optional and could be extended into a larger course project.}
+
+The goal of this problem is to test the 3D reconstruction code with real images. A number of the assumptions we have made will not work when the input is real images of a more complex scene. For instance, the simple strategy of differentiating between foreground and background segmentation will not work with other scenes.
+
+Try taking pictures of real-world scenes and propose modifications to the scheme proposed in this lecture so that you can get some better 3D reconstructions. The goal is not to build a general system, but to be able to handle a few more situations.
+\end{document}
