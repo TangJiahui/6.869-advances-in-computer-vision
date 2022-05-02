@@ -1,0 +1,27 @@
+Instructions: 
+
+Naming: For each < filename >.txt file in the folder generate a single FITS image with the name < filename >.fits
+
+Field of View (FOV): Please submit images with a field of view of 500 micro-arcseconds. This is not necessarily the field of view of the image, but a maximum size. Reconstruct at a field of view that you find fits the data best, but please pad your final reconstruction to have a field of view of 500 micro-arcseconds before submitting. Optionally, in addition to submitting a single image, you can also submit a video that reconstructs a changing emission over the full observation time. 
+
+Total Flux Density: We provide you with the total flux density of the first source in IMAGEDETAILS. Reconstruct images assuming the units Janskys/pixel. Therefore, ideally, the sum of the pixel values in your image would be equal to the total flux density.  
+
+Data Format: To help you easily get started, we provide the data in 3 formats: text, uvfits and oifits. Some fields in oifits and uvfits may not be filled in if they are unnecessary for this imaging challenge. oifits files that are indicated as “normalized” have the data and error bars appropriately scaled to reconstruct an image with a total flux density of 1 Jy. Dataset 2 does not contain a normalized dataset as the total flux is changing over time.  
+
+Submitting: Submit a zip file containing JUST your fits images (Do not zip a folder containing the images, just zip the images).  Although Dataset 2 is generated from time-varying data, reconstruct a single image that you feel is most representative.
+
+
+Additional Tips: 
+
+Image Convention: Make sure that your reconstructions use the same left-right up-down flipping conventions as us. To test that your resulting images use our convention, test some results using the sample data provided on the challenge website. Make sure it matches the ground truth image. If your results are flipped with respect to our ground truth images, make sure to flip them appropriately before submitting results.
+
+
+
+Questions? 
+
+Please contact vlbiimaging@gmail.com with any questions you may have. 
+
+
+
+Good Luck!
+

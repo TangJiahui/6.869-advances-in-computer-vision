@@ -1,0 +1,7 @@
+Dataset Images 1-3:
+4GHz BW
+Total Flux: 2 Jy before scattering
+Sgr A* Location
+* Scattering error: Diffractive and Refractive
+* Phase error: Thermal + Atmospheric 
+
